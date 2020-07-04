@@ -1,7 +1,7 @@
 import time
 import numpy as np
 import tensorflow as tf
-
+import time
 from models import GAT
 from utils import process
 
@@ -33,6 +33,7 @@ print('residual: ' + str(residual))
 print('nonlinearity: ' + str(nonlinearity))
 print('model: ' + str(model))
 
+
 adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = process.load_data(dataset)
 features, spars = process.preprocess_features(features)
 
@@ -52,6 +53,8 @@ val_mask = val_mask[np.newaxis]
 test_mask = test_mask[np.newaxis]
 
 biases = process.adj_to_bias(adj, [nb_nodes], nhood=1)
+
+start_time = time.time()
 
 with tf.Graph().as_default():
     with tf.name_scope('input'):
@@ -172,3 +175,6 @@ with tf.Graph().as_default():
         print('Test loss:', ts_loss/ts_step, '; Test accuracy:', ts_acc/ts_step)
 
         sess.close()
+
+end_time = time.time()
+print("total time:", end_time - start_time)
