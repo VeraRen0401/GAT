@@ -6,8 +6,8 @@ from models import GAT
 from utils import process_ppi,process
 
 checkpt_file = 'pre_trained/ppi/mod_ppi.ckpt'
- 
-is_toy_model = True # use toy ppi dataset or full ppi dataset
+print("check it's updated")
+is_toy_model = False # use toy ppi dataset or full ppi dataset
 
 # training params
 if is_toy_model:    
