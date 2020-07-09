@@ -7,8 +7,7 @@ from utils import process_ppi,process
 
 checkpt_file = 'pre_trained/ppi/mod_ppi.ckpt'
  
-
-is_toy_model = True # use toy ppi dataset or full ppi dataset
+is_toy_model = False # use toy ppi dataset or full ppi dataset
 
 # training params
 if is_toy_model:    
@@ -152,6 +151,7 @@ with tf.Graph().as_default():
             train_acc_avg = 0
             val_loss_avg = 0
             val_acc_avg = 0
+        print("number of epochs: ", epoch)
 
         saver.restore(sess, checkpt_file)
 
@@ -178,4 +178,4 @@ with tf.Graph().as_default():
         sess.close()
 
 end_time = time.time()
-print("total time:", end_time - start_time)
+print("total time in min:", (end_time - start_time)/60)

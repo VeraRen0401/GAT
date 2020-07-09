@@ -151,6 +151,7 @@ with tf.Graph().as_default():
             train_acc_avg = 0
             val_loss_avg = 0
             val_acc_avg = 0
+        print("number of epochs: ", epoch)
 
         saver.restore(sess, checkpt_file)
 
