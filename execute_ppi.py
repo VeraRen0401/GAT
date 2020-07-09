@@ -7,14 +7,14 @@ from utils import process_ppi,process
 
 checkpt_file = 'pre_trained/ppi/mod_ppi.ckpt'
  
-is_toy_model = False # use toy ppi dataset or full ppi dataset
+is_toy_model = True # use toy ppi dataset or full ppi dataset
 
 # training params
 if is_toy_model:    
     batch_size = 1
 else:
     batch_size = 2
-nb_epochs = 100000
+nb_epochs = 2000
 patience = 100
 lr = 0.005  # learning rate
 l2_coef = 0  # weight decay
@@ -45,6 +45,13 @@ train_nodes, val_nodes, test_nodes,\
 tr_msk, vl_msk, ts_msk\
 = process_ppi.process_p2p(is_toy_model)
 
+for i in range(train_feat.shape[0]):
+    train_feat[i] = process.preprocess_features2(train_feat[i])
+for i in range(val_feat.shape[0]):
+    val_feat[i] = process.preprocess_features2(val_feat[i])
+for i in range(test_feat.shape[0]):
+    test_feat[i] = process.preprocess_features2(test_feat[i])
+
 nb_nodes = train_feat.shape[1]
 ft_size = train_feat.shape[2]
 nb_classes = train_labels.shape[2]
@@ -52,7 +59,6 @@ nb_classes = train_labels.shape[2]
 tr_biases = process.adj_to_bias(train_adj, train_nodes, nhood=1)
 vl_biases = process.adj_to_bias(val_adj, val_nodes, nhood=1)
 ts_biases = process.adj_to_bias(test_adj, test_nodes, nhood=1)
-
 
 start_time = time.time()
 
