@@ -20,7 +20,7 @@ lr = 0.005  # learning rate
 l2_coef = 0  # weight decay
 hid_units = [256, 256] # numbers of hidden units per each attention head in each layer
 n_heads = [4, 4, 6] # additional entry for the output layer
-residual = False
+residual = True
 nonlinearity = tf.nn.elu
 model = GAT
 
