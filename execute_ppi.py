@@ -4,6 +4,7 @@ import tensorflow as tf
 import time
 from models import GAT
 from utils import process_ppi,process
+import pdb 
 
 checkpt_file = 'pre_trained/ppi/mod_ppi.ckpt'
 print("check it's updated")
@@ -37,6 +38,8 @@ print('residual: ' + str(residual))
 print('nonlinearity: ' + str(nonlinearity))
 print('model: ' + str(model))
 
+pdb.set_trace()
+
 
 train_adj,val_adj,test_adj,\
 train_feat,val_feat,test_feat,\
@@ -56,11 +59,17 @@ nb_nodes = train_feat.shape[1]
 ft_size = train_feat.shape[2]
 nb_classes = train_labels.shape[2]
 
+print("stop")
+pdb.set_trace()
+
 tr_biases = process.adj_to_bias(train_adj, train_nodes, nhood=1)
 vl_biases = process.adj_to_bias(val_adj, val_nodes, nhood=1)
 ts_biases = process.adj_to_bias(test_adj, test_nodes, nhood=1)
 
-start_time = time.time()
+print("next step")
+pdb.set_trace()
+
+
 
 with tf.Graph().as_default():
     with tf.name_scope('input'):
@@ -80,8 +89,8 @@ with tf.Graph().as_default():
     log_resh = tf.reshape(logits, [-1, nb_classes])
     lab_resh = tf.reshape(lbl_in, [-1, nb_classes])
     msk_resh = tf.reshape(msk_in, [-1])
-    loss = model.masked_softmax_cross_entropy(log_resh, lab_resh, msk_resh)
-    accuracy = model.masked_accuracy(log_resh, lab_resh, msk_resh)
+    loss = model.masked_sigmoid_cross_entropy(log_resh, lab_resh, msk_resh)
+    accuracy = model.micro_f1(log_resh, lab_resh, msk_resh)
 
     train_op = model.training(loss, lr, l2_coef)
 
