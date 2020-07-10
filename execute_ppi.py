@@ -45,12 +45,12 @@ train_nodes, val_nodes, test_nodes,\
 tr_msk, vl_msk, ts_msk\
 = process_ppi.process_p2p(is_toy_model)
 
-for i in range(train_feat.shape[0]):
-    train_feat[i] = process.preprocess_features2(train_feat[i])
-for i in range(val_feat.shape[0]):
-    val_feat[i] = process.preprocess_features2(val_feat[i])
-for i in range(test_feat.shape[0]):
-    test_feat[i] = process.preprocess_features2(test_feat[i])
+# for i in range(train_feat.shape[0]):
+#     train_feat[i] = process.preprocess_features2(train_feat[i])
+# for i in range(val_feat.shape[0]):
+#     val_feat[i] = process.preprocess_features2(val_feat[i])
+# for i in range(test_feat.shape[0]):
+#     test_feat[i] = process.preprocess_features2(test_feat[i])
 
 nb_nodes = train_feat.shape[1]
 ft_size = train_feat.shape[2]
