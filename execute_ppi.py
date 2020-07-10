@@ -38,9 +38,6 @@ print('residual: ' + str(residual))
 print('nonlinearity: ' + str(nonlinearity))
 print('model: ' + str(model))
 
-pdb.set_trace()
-
-
 train_adj,val_adj,test_adj,\
 train_feat,val_feat,test_feat,\
 train_labels,val_labels, test_labels,\
@@ -59,17 +56,9 @@ nb_nodes = train_feat.shape[1]
 ft_size = train_feat.shape[2]
 nb_classes = train_labels.shape[2]
 
-print("stop")
-pdb.set_trace()
-
 tr_biases = process.adj_to_bias(train_adj, train_nodes, nhood=1)
 vl_biases = process.adj_to_bias(val_adj, val_nodes, nhood=1)
 ts_biases = process.adj_to_bias(test_adj, test_nodes, nhood=1)
-
-print("next step")
-pdb.set_trace()
-
-
 
 with tf.Graph().as_default():
     with tf.name_scope('input'):
