@@ -91,6 +91,7 @@ with tf.Graph().as_default():
     vacc_mx = 0.0
     curr_step = 0
 
+    start_time = time.time()
     with tf.Session() as sess:
         sess.run(init_op)
 
